@@ -8,23 +8,23 @@ function promptUser() {
   return inquirer.prompt([
     {
       type: "input",
-      name: "name",
-      message: "What is your name?"
+      name: "title",
+      message: "What is the title of the project?"
     },
     {
       type: "input",
-      name: "location",
-      message: "Where are you from?"
+      name: "description",
+      message: "Describe what the project does?"
     },
     {
       type: "input",
-      name: "hobby",
-      message: "What is your favorite hobby?"
+      name: "appscreenie",
+      message: "Link a screenshot of the application here"
     },
     {
       type: "input",
-      name: "food",
-      message: "What is your favorite food?"
+      name: "license",
+      message: "What is the license?"
     },
     {
       type: "input",
@@ -33,40 +33,89 @@ function promptUser() {
     },
     {
       type: "input",
-      name: "linkedin",
-      message: "Enter your LinkedIn URL."
+      name: "email",
+      message: "Enter your Github email."
+    },
+    {
+      type: "input",
+      name: "profpic",
+      message: "Link your Github profile picture here."
     }
   ]);
 }
 
 function generateHTML(answers) {
   return `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <title>Document</title>
-</head>
-<body>
-  <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Hi! My name is ${answers.name}</h1>
-    <p class="lead">I am from ${answers.location}.</p>
-    <h3>Example heading <span class="badge badge-secondary">Contact Me</span></h3>
-    <ul class="list-group">
-      <li class="list-group-item">My GitHub username is ${answers.github}</li>
-      <li class="list-group-item">LinkedIn: ${answers.linkedin}</li>
-    </ul>
-  </div>
-</div>
-</body>
-</html>`;
+  # ${answers.title}
+  > ${answers.description}
+  
+  [![NPM Version][npm-image]][npm-url]
+  ## Table of Contents
+    * Installation
+    * Usage
+    * License
+    * Contributing
+    * Tests
+    * Creater info
+  
+  ## Installation
+  
+  OS X & Linux:
+  
+  \```sh
+  npm install ${answers.title} --save
+  \```
+  
+  Windows Bash Terminal:
+  
+  \```sh
+  npm install ${answers.title} --save
+  \```
+  
+  ## Usage example
+  
+  AS a user
+  WHEN I do thing
+  THEN I want x
+  WHEN I click x
+  THEN x does y
+  
+  ![Screenshot of Application](${answers.appscreenie} "Screenshot")-
+  
+  Upload screenshots, video links or gifs here to help the user understand what it is the project does.
+  
+  ## License
+  
+  License: ${answers.license}
+  
+  ## Contributing
+  
+  1. Fork it (<https://github.com/schoess/README_Generator/fork>)
+  2. Create your feature branch (\`git checkout -b feature/fooBar\`)
+  3. Commit your changes (\`git commit -am 'Add some fooBar'\`)
+  4. Push to the branch (\`git push origin feature/fooBar\`)
+  5. Create a new Pull Request
+  
+  ## Questions
+  
+  Questions? Hit me up on Github
+  
+  Username: ${answers.github}
+  Email: ${answers.email}
+  
+  ![Github Profile Picture](${answers.profpic} "Profile Picture")
+  
+  <!-- Markdown link & img dfn's -->
+  [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
+  [npm-url]: https://npmjs.org/package/datadog-metrics
+  [npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
+  [travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
+  [travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
+  [wiki]: https://github.com/yourname/yourproject/wiki`;
 }
 
 async function init() {
-  console.log("hi")
+  console.log("ready")
   try {
     const answers = await promptUser();
 
