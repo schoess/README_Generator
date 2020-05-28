@@ -44,7 +44,7 @@ function promptUser() {
   ]);
 }
 
-function generateHTML(answers) {
+function generateMD(answers) {
   return `
   # ${answers.title}
   > ${answers.description}
@@ -62,15 +62,15 @@ function generateHTML(answers) {
   
   OS X & Linux:
   
-  \```sh
+  \`\`\`sh
   npm install ${answers.title} --save
-  \```
+  \`\`\`
   
   Windows Bash Terminal:
   
-  \```sh
+  \`\`\`sh
   npm install ${answers.title} --save
-  \```
+  \`\`\`
   
   ## Usage example
   
@@ -119,11 +119,11 @@ async function init() {
   try {
     const answers = await promptUser();
 
-    const html = generateHTML(answers);
+    const markdown = generateMD(answers);
 
-    await writeFileAsync("index.html", html);
+    await writeFileAsync("README_template.md", markdown);
 
-    console.log("Successfully wrote to index.html");
+    console.log("Successfully created readme template");
   } catch(err) {
     console.log(err);
   }
